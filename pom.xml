@@ -25,6 +25,7 @@
         <java.version>17</java.version>
 
         <!-- dependencies -->
+        <lib.atlantafx.version>0.1.0-SNAPSHOT</lib.atlantafx.version>
         <lib.bouncycastle.version>1.69</lib.bouncycastle.version>
         <lib.commons-codec.version>1.15</lib.commons-codec.version>
         <lib.commons-collections.version>4.4</lib.commons-collections.version>
@@ -162,6 +163,17 @@
             <url>https://jcenter.bintray.com</url>
             <snapshots>
                 <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>ossrh.snapshots</id>
+            <name>OSSRH snapshots</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>
@@ -331,6 +343,11 @@
             </dependency>
 
             <!-- UI -->
+            <dependency>
+                <groupId>io.github.mkpaz</groupId>
+                <artifactId>atlantafx-base</artifactId>
+                <version>${lib.atlantafx.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.fxmisc.richtext</groupId>
                 <artifactId>richtextfx</artifactId>

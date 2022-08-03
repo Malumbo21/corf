@@ -594,6 +594,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>telekit-controls</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.github.mkpaz</groupId>
+            <artifactId>atlantafx-base</artifactId>
+        </dependency>
         <!--
             RichTextFX (also Flowless, UndoFX etc) is a transitive dependency of telekit-desktop
             but due to modularization jerks Maven requires all of them to be direct dependency

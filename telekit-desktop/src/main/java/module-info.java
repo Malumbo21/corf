@@ -2,6 +2,7 @@ module telekit.desktop {
 
     requires telekit.base;
     requires telekit.controls;
+    requires atlantafx.base;
 
     // not modularized dependencies
     requires org.apache.commons.io;

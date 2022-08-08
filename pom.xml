@@ -4,17 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>telekit</groupId>
-    <artifactId>telekit-parent</artifactId>
+    <groupId>corf</groupId>
+    <artifactId>corf-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.1.0</version>
 
     <modules>
-        <module>telekit-base</module>
-        <module>telekit-controls</module>
-        <module>telekit-desktop</module>
-        <module>telekit-plugin-example</module>
-        <module>telekit-tests</module>
+        <module>base</module>
+        <module>desktop</module>
+        <module>plugin-example</module>
+        <module>test</module>
     </modules>
 
     <properties>
@@ -23,66 +22,84 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <java.version>17</java.version>
+        <openjfx.version>19</openjfx.version>
 
-        <!-- dependencies -->
-        <lib.atlantafx.version>0.1.0-SNAPSHOT</lib.atlantafx.version>
-        <lib.bouncycastle.version>1.69</lib.bouncycastle.version>
+        <app.name>Corf</app.name>
+        <app.version>1.0.0</app.version>
+
+        <lib.atlantafx.version>1.1.0</lib.atlantafx.version>
+        <!-- TODO: Release and update -->
+        <lib.backbonefx.version>1.0.1-SNAPSHOT</lib.backbonefx.version>
+        <!-- DO NOT UPDATE independently of sshj without a reason -->
+        <lib.bouncycastle.version>1.70</lib.bouncycastle.version>
         <lib.commons-codec.version>1.15</lib.commons-codec.version>
         <lib.commons-collections.version>4.4</lib.commons-collections.version>
-        <lib.commons-compress.version>1.21</lib.commons-compress.version>
+        <lib.commons-compress.version>1.22</lib.commons-compress.version>
         <lib.commons-dbutils.version>1.7</lib.commons-dbutils.version>
         <lib.commons-csv.version>1.9.0</lib.commons-csv.version>
         <lib.commons-io.version>2.11.0</lib.commons-io.version>
         <lib.commons-lang.version>3.12.0</lib.commons-lang.version>
-        <lib.commons-net.version>3.8.0</lib.commons-net.version>
-        <lib.dflib.version>0.12</lib.dflib.version>
+        <lib.commons-net.version>3.9.0</lib.commons-net.version>
+        <lib.datafaker.version>1.7.0</lib.datafaker.version>
+        <lib.dflib.version>0.15</lib.dflib.version>
         <lib.expectit.version>0.9.0</lib.expectit.version>
-        <lib.flyway.version>7.11.3</lib.flyway.version>
-        <lib.hsqldb.version>2.6.0</lib.hsqldb.version>
-        <lib.httpclient5.version>5.1</lib.httpclient5.version>
-        <lib.ipaddress.version>5.3.3</lib.ipaddress.version>
-        <lib.ikonli.version>12.2.0</lib.ikonli.version>
-        <lib.j2html.version>1.5.0</lib.j2html.version>
-        <lib.jsoup.version>1.14.2</lib.jsoup.version>
-        <lib.jackson.version>2.13.0</lib.jackson.version>
-        <lib.javax-inject.version>1.1.0</lib.javax-inject.version>
-        <lib.jetbrains-annotations.version>22.0.0</lib.jetbrains-annotations.version>
+        <lib.flyway.version>9.8.3</lib.flyway.version>
+        <lib.hsqldb.version>2.7.1</lib.hsqldb.version>
+        <lib.httpclient5.version>5.2</lib.httpclient5.version>
+        <lib.ipaddress.version>5.3.4</lib.ipaddress.version>
+        <lib.ikonli.version>12.3.1</lib.ikonli.version>
+        <lib.j2html.version>1.6.0</lib.j2html.version>
+        <lib.jsoup.version>1.15.3</lib.jsoup.version>
+        <lib.jackson.version>2.14.1</lib.jackson.version>
+        <lib.jetbrains-annotations.version>23.0.0</lib.jetbrains-annotations.version>
+        <lib.kaitai-struct.version>0.10</lib.kaitai-struct.version>
+        <!-- DO NOT UPDATE: This is the last stable version. Newer versions don't add any features or
+             bugfixes but break backward compatibility and for some reason not (yet?) work with jlink.
+             Author changed artifact name to the 'eu.hansolo.medusa' (all lowercase) and started large
+             refactoring to maintain some kind of ecosystem across all its projects, so it's not a small
+             zero-dependency library anymore.
+        -->
         <lib.medusa.version>11.7</lib.medusa.version>
         <lib.mustache.version>0.9.10</lib.mustache.version>
-        <lib.netty.version>4.1.68.Final</lib.netty.version>
-        <!--
-            DO NOT update pdfbox version to 3.x while it uses sun.misc.Unsafe, it won't work with JPMS
-            https://github.com/apache/pdfbox/blob/trunk/pdfbox/src/main/java/org/apache/pdfbox/io/IOUtils.java#L216
+        <lib.nbvcxz.version>1.5.0</lib.nbvcxz.version>
+        <!-- DO NOT UPDATE: pdfbox 3.x is not stable yet (2022-12) and uses sun.misc.Unsafe,
+             which won't work with JPMS. It will fail at runtime, so beware.
+             2.x https://github.com/apache/pdfbox/blob/2.0.27/pdfbox/src/main/java/org/apache/pdfbox/io/IOUtils.java
+             3.x https://github.com/apache/pdfbox/blob/trunk/io/src/main/java/org/apache/pdfbox/io/IOUtils.java
         -->
-        <lib.pdfbox.version>2.0.24</lib.pdfbox.version>
+        <lib.pdfbox.version>2.0.27</lib.pdfbox.version>
         <lib.semantic-version.version>2.1.1</lib.semantic-version.version>
-        <lib.snmp4j.version>3.5.1</lib.snmp4j.version>
-        <lib.slf4j.version>2.0.0-alpha5</lib.slf4j.version>
-        <lib.sshj.version>0.32.0</lib.sshj.version>
-
-        <lib.richtextfx.version>0.10.6</lib.richtextfx.version>
-        <lib.flowless.version>0.6.6</lib.flowless.version>
+        <lib.snmp4j.version>3.7.4</lib.snmp4j.version>
+        <lib.slf4j.version>2.0.5</lib.slf4j.version>
+        <lib.sshj.version>0.34.0</lib.sshj.version>
+        <!-- richtextfx -->
+        <lib.richtextfx.version>0.11.0</lib.richtextfx.version>
+        <lib.flowless.version>0.7.0</lib.flowless.version>
         <lib.reactfx.version>2.0-M5</lib.reactfx.version>
         <lib.undofx.version>2.1.1</lib.undofx.version>
         <lib.wellbehavedfx.version>0.3.3</lib.wellbehavedfx.version>
 
-        <test.assertj.version>3.21.0</test.assertj.version>
-        <test.junit.version>5.8.1</test.junit.version>
+        <!-- test -->
+        <test.assertj.version>3.23.1</test.assertj.version>
+        <test.junit.version>5.9.1</test.junit.version>
         <test.p6spy.version>3.9.1</test.p6spy.version>
 
         <!-- plugins -->
-        <plugin.antrun.version>1.8</plugin.antrun.version>
-        <plugin.assembly.version>3.3.0</plugin.assembly.version>
-        <plugin.compiler.version>3.8.1</plugin.compiler.version>
-        <plugin.dependency.version>3.1.2</plugin.dependency.version>
-        <plugin.jar.version>3.2.0</plugin.jar.version>
-        <plugin.javafx.version>0.0.6</plugin.javafx.version>
+        <plugin.antrun.version>3.1.0</plugin.antrun.version>
+        <plugin.assembly.version>3.4.2</plugin.assembly.version>
+        <plugin.compiler.version>3.10.1</plugin.compiler.version>
+        <plugin.dependency.version>3.4.0</plugin.dependency.version>
+        <plugin.errorprone.version>2.16</plugin.errorprone.version>
+        <plugin.nullaway.version>0.10.4</plugin.nullaway.version>
+        <plugin.jar.version>3.3.0</plugin.jar.version>
+        <plugin.javafx.version>0.0.8</plugin.javafx.version>
         <plugin.jtoolprovider.version>1.0.34</plugin.jtoolprovider.version>
-        <plugin.moditect.version>1.0.0.RC1</plugin.moditect.version>
-        <plugin.resources.version>3.2.0</plugin.resources.version>
+        <plugin.moditect.version>1.0.0.RC2</plugin.moditect.version>
+        <plugin.resources.version>3.3.0</plugin.resources.version>
+        <plugin.sass-cli-maven-plugin>1.0.1</plugin.sass-cli-maven-plugin>
         <plugin.source.version>3.2.1</plugin.source.version>
-        <plugin.surefire.version>3.0.0-M5</plugin.surefire.version>
-        <plugin.versions.version>2.8.1</plugin.versions.version>
+        <plugin.surefire.version>3.0.0-M7</plugin.surefire.version>
+        <plugin.versions.version>2.13.0</plugin.versions.version>
     </properties>
 
     <build>
@@ -138,6 +155,14 @@
                     <version>${plugin.resources.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>us.hebi.sass</groupId>
+                    <artifactId>sass-cli-maven-plugin</artifactId>
+                    <version>${plugin.sass-cli-maven-plugin}</version>
+                    <configuration>
+                        <sassVersion>1.54.5</sassVersion>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${plugin.source.version}</version>
@@ -156,15 +181,70 @@
         </pluginManagement>
     </build>
 
+    <profiles>
+        <profile>
+            <id>linux-active</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <platform>linux</platform>
+            </properties>
+        </profile>
+        <profile>
+            <id>windows-active</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <platform>win</platform>
+            </properties>
+        </profile>
+        <profile>
+            <id>lint</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>${plugin.compiler.version}</version>
+                        <configuration>
+                            <showWarnings>true</showWarnings>
+                            <compilerArgs>
+                                <arg>-XDcompilePolicy=simple</arg>
+                                <arg>
+                                    -Xplugin:ErrorProne \
+                                    -Xep:NullAway:ERROR \
+                                    -XepOpt:NullAway:AnnotatedPackages=corf \
+                                    -XepExcludedPaths:.*/src/test/java/.*
+                                    -XepAllErrorsAsWarnings
+                                </arg>
+                            </compilerArgs>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>com.google.errorprone</groupId>
+                                    <artifactId>error_prone_core</artifactId>
+                                    <version>${plugin.errorprone.version}</version>
+                                </path>
+                                <path>
+                                    <groupId>com.uber.nullaway</groupId>
+                                    <artifactId>nullaway</artifactId>
+                                    <version>${plugin.nullaway.version}</version>
+                                </path>
+                            </annotationProcessorPaths>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <repositories>
-        <repository>
-            <id>bintray</id>
-            <name>bintray</name>
-            <url>https://jcenter.bintray.com</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
+        <!-- TODO: Remove snapshots repo as it's temp solution. -->
         <repository>
             <id>ossrh.snapshots</id>
             <name>OSSRH snapshots</name>
@@ -183,31 +263,34 @@
             <!-- Project Modules -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>telekit-base</artifactId>
+                <artifactId>corf-base</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>telekit-controls</artifactId>
+                <artifactId>corf-plugin-example</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>telekit-plugin-example</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>telekit</groupId>
-                <artifactId>telekit-tests</artifactId>
+                <groupId>corf</groupId>
+                <artifactId>corf-test</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- Apache Commons -->
+            <!-- OpenJFX -->
             <dependency>
-                <groupId>commons-codec</groupId>
-                <artifactId>commons-codec</artifactId>
-                <version>${lib.commons-codec.version}</version>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>${openjfx.version}</version>
             </dependency>
+            <dependency>
+                <!-- required for Scenic View -->
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-swing</artifactId>
+                <version>${openjfx.version}</version>
+            </dependency>
+
+            <!-- Language / Base -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
@@ -215,23 +298,13 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>${lib.commons-compress.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-csv</artifactId>
-                <version>${lib.commons-csv.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${lib.commons-io.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${lib.commons-lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${lib.jetbrains-annotations.version}</version>
             </dependency>
 
             <!-- Database -->
@@ -239,6 +312,16 @@
                 <groupId>commons-dbutils</groupId>
                 <artifactId>commons-dbutils</artifactId>
                 <version>${lib.commons-dbutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nhl.dflib</groupId>
+                <artifactId>dflib</artifactId>
+                <version>${lib.dflib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nhl.dflib</groupId>
+                <artifactId>dflib-csv</artifactId>
+                <version>${lib.dflib.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.flywaydb</groupId>
@@ -264,12 +347,25 @@
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${lib.slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <!-- apache.commons.logging bridge -->
+                <groupId>org.slf4j</groupId>
                 <artifactId>jcl-over-slf4j</artifactId>
                 <version>${lib.slf4j.version}</version>
             </dependency>
             <dependency>
+                <!-- java.util.logging bridge -->
                 <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-jdk14</artifactId>
+                <artifactId>jul-to-slf4j</artifactId>
+                <version>${lib.slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <!-- System.Logger bridge -->
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-jdk-platform-logging</artifactId>
                 <version>${lib.slf4j.version}</version>
             </dependency>
 
@@ -295,9 +391,9 @@
                 <version>${lib.httpclient5.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-all</artifactId>
-                <version>${lib.netty.version}</version>
+                <groupId>com.github.seancfoley</groupId>
+                <artifactId>ipaddress</artifactId>
+                <version>${lib.ipaddress.version}</version>
             </dependency>
             <dependency>
                 <groupId>net.sf.expectit</groupId>
@@ -315,7 +411,27 @@
                 <version>${lib.snmp4j.version}</version>
             </dependency>
 
-            <!-- Serialization -->
+            <!-- IO / Serialization -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${lib.commons-codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>${lib.commons-csv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${lib.commons-compress.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${lib.commons-io.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
@@ -341,17 +457,56 @@
                 <artifactId>jackson-dataformat-yaml</artifactId>
                 <version>${lib.jackson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>pdfbox</artifactId>
+                <version>${lib.pdfbox.version}</version>
+                <exclusions>
+                    <!-- exclude Commons Logging in favor of SLF4J -->
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>fontbox</artifactId>
+                <version>${lib.pdfbox.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.kaitai</groupId>
+                <artifactId>kaitai-struct-runtime</artifactId>
+                <version>${lib.kaitai-struct.version}</version>
+            </dependency>
 
-            <!-- UI -->
+            <!-- UI / Desktop -->
             <dependency>
                 <groupId>io.github.mkpaz</groupId>
                 <artifactId>atlantafx-base</artifactId>
                 <version>${lib.atlantafx.version}</version>
             </dependency>
             <dependency>
+                <groupId>io.github.mkpaz</groupId>
+                <artifactId>backbonefx</artifactId>
+                <version>${lib.backbonefx.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.fxmisc.richtext</groupId>
                 <artifactId>richtextfx</artifactId>
                 <version>${lib.richtextfx.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.fxmisc.flowless</groupId>
@@ -380,11 +535,6 @@
             </dependency>
             <dependency>
                 <groupId>org.kordamp.ikonli</groupId>
-                <artifactId>ikonli-fontawesome5-pack</artifactId>
-                <version>${lib.ikonli.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.kordamp.ikonli</groupId>
                 <artifactId>ikonli-material2-pack</artifactId>
                 <version>${lib.ikonli.version}</version>
             </dependency>
@@ -392,34 +542,15 @@
                 <groupId>eu.hansolo</groupId>
                 <artifactId>Medusa</artifactId>
                 <version>${lib.medusa.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
-            <!-- Various -->
-            <dependency>
-                <groupId>org.jetbrains</groupId>
-                <artifactId>annotations</artifactId>
-                <version>${lib.jetbrains-annotations.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nhl.dflib</groupId>
-                <artifactId>dflib</artifactId>
-                <version>${lib.dflib.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nhl.dflib</groupId>
-                <artifactId>dflib-csv</artifactId>
-                <version>${lib.dflib.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.pustike</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>${lib.javax-inject.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.seancfoley</groupId>
-                <artifactId>ipaddress</artifactId>
-                <version>${lib.ipaddress.version}</version>
-            </dependency>
+            <!-- HTML -->
             <dependency>
                 <groupId>com.j2html</groupId>
                 <artifactId>j2html</artifactId>
@@ -430,33 +561,22 @@
                 <artifactId>jsoup</artifactId>
                 <version>${lib.jsoup.version}</version>
             </dependency>
+
+            <!-- Various -->
+            <dependency>
+                <groupId>me.gosimple</groupId>
+                <artifactId>nbvcxz</artifactId>
+                <version>${lib.nbvcxz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.datafaker</groupId>
+                <artifactId>datafaker</artifactId>
+                <version>${lib.datafaker.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.github.spullara.mustache.java</groupId>
                 <artifactId>compiler</artifactId>
                 <version>${lib.mustache.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.pdfbox</groupId>
-                <artifactId>pdfbox</artifactId>
-                <version>${lib.pdfbox.version}</version>
-                <exclusions>
-                    <!-- exclude Commons Logging in favor of SLF4J -->
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.pdfbox</groupId>
-                <artifactId>fontbox</artifactId>
-                <version>${lib.pdfbox.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>de.skuzzle</groupId>
@@ -465,10 +585,8 @@
             </dependency>
 
             <!--
-                BouncyCastle
-
-                Note that BouncyCastle is "incompatible" with Oracle JDK.
-                More precisely it can't be included into runtime image:
+                BouncyCastle is incompatible with Oracle JDK. It can't be included
+                into runtime image 'Oracle's' jlink only accepts signed jars.
                 https://stackoverflow.com/a/68295740/5694145
             -->
             <dependency>
@@ -487,7 +605,7 @@
                 <version>${lib.bouncycastle.version}</version>
             </dependency>
 
-            <!-- TEST -->
+            <!-- Test -->
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>

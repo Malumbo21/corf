@@ -46,6 +46,14 @@ jobs:
         path: ./desktop/target/release/*
         retention-days: 1
 
+    - name: Build | Upload resources
+      uses: actions/upload-artifact@v2
+      with:
+        name: resources
+        path: |
+          RELEASE_NOTES.md
+        retention-days: 1
+
   release:
     needs: build
     runs-on: ubuntu-latest

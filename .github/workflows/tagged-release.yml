@@ -55,3 +55,10 @@ jobs:
 
     - name: Release | List content
       run: ls -R
+
+    - name: Release | Publish to Github
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          binaries/*
+        body_path: resources/RELEASE_NOTES.md
